@@ -1,0 +1,33 @@
+{
+  "name": "autobots",
+  "version": "1.0.0",
+  "description": "Codemods for great good!",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "Nicholas Hwang",
+    "email": "nick.joosung.hwang@gmail.com",
+    "url": "nicholash.wang"
+  },
+  "engines": {
+    "node": ">=6.x"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0"
+  },
+  "eslintConfig": {
+    "extends": "geekjuice/server"
+  },
+  "dependencies": {
+    "eslint": "^3.9.1",
+    "eslint-config-geekjuice": "^2.3.5",
+    "eslint-plugin-import": "^2.0.1",
+    "jscodeshift": "^0.3.30"
+  },
+  "ava": {
+    "files": [
+      "__tests__/**/*.spec.js"
+    ],
+    "failFast": true
+  }
+}
