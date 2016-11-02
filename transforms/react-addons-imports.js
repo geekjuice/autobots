@@ -117,6 +117,10 @@ module.exports = (
           []
         );
 
+        if (!imports.length) {
+          return null;
+        }
+
         return { ...value, specifiers: imports };
       });
 

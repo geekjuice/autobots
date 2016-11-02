@@ -68,8 +68,6 @@ module.exports = (
 
         if (!length) {
           return value;
-        } else if (length === 1) {
-          return null;
         }
 
         const imports = specifiers.reduce(
@@ -84,6 +82,10 @@ module.exports = (
           },
           []
         );
+
+        if (!imports.length) {
+          return null;
+        }
 
         return { ...value, specifiers: imports };
       });
