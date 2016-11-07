@@ -35,6 +35,17 @@ module.exports = (
   const root = j(source);
 
   /**
+   * Whether node is named `exists` import
+   *
+   * @param   {ASTNode} node AST node to traverse
+   * @returns {boolean}      Whether node is named `exists` import
+   */
+  const isExistsImport = (node = {}) => {
+    return node.type === 'ImportSpecifier'
+      && node.id && node.id.name === NAMED_IMPORT;
+  };
+
+  /**
     * Removes extraneous `exists` named imports
     *
     * @param   {ASTNode} node AST node to traverse
@@ -58,11 +69,7 @@ module.exports = (
           }
         } = path;
 
-        const { length } = specifiers.filter(
-          ({ type, id: { name } }) => {
-            return type === 'ImportSpecifier' && name === NAMED_IMPORT;
-          }
-        );
+        const { length } = specifiers.filter(isExistsImport);
 
         imported = imported || length > 0;
 
@@ -72,13 +79,9 @@ module.exports = (
 
         const imports = specifiers.reduce(
           (memo, specifier) => {
-            const { type, id: { name } } = specifier;
-
-            if (type === 'ImportSpecifier' && name === NAMED_IMPORT) {
-              return memo;
-            }
-
-            return [...memo, specifier];
+            return isExistsImport(specifier)
+              ? memo
+              : [...memo, specifier];
           },
           []
         );

@@ -4,6 +4,8 @@
  * @module transforms/react-addons-imports.js
  */
 
+module.exports.parser = 'flow';
+
 /**
  * Create partially bound function
  *
@@ -76,6 +78,17 @@ module.exports = (
   const root = j(source);
 
   /**
+   * Whether node is named `addons` import
+   *
+   * @param   {ASTNode} node AST node to traverse
+   * @returns {boolean}      Whether node is named `addons` import
+   */
+  const isAddonsImport = node => {
+    return node.type === 'ImportSpecifier'
+      && node.id && node.id.name === 'addons';
+  };
+
+  /**
    * Removes extraneous addon named imports
    *
    * @param   {ASTNode} node    AST node to traverse
@@ -93,11 +106,7 @@ module.exports = (
           }
         } = path;
 
-        const addons = specifiers.filter(
-          ({ type, id: { name } }) => {
-            return type === 'ImportSpecifier' && name === 'addons';
-          }
-        );
+        const addons = specifiers.filter(isAddonsImport);
 
         if (!addons.length) {
           return value;
@@ -105,13 +114,9 @@ module.exports = (
 
         const imports = specifiers.reduce(
           (memo, specifier) => {
-            const { type, id: { name } } = specifier;
-
-            if (type === 'ImportSpecifier' && name === 'addons') {
-              return memo;
-            }
-
-            return [...memo, specifier];
+            return isAddonsImport(specifier)
+              ? memo
+              : [...memo, specifier];
           },
           []
         );
@@ -338,5 +343,3 @@ module.exports = (
     reuseWhitespace: true
   });
 };
-
-module.exports.parser = 'flow';
