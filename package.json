@@ -22,7 +22,7 @@
     "jscodeshift": "0.3.30"
   },
   "devDependencies": {
-    "jest": "^16.0.2"
+    "jest": "16.0.2"
   },
   "eslintConfig": {
     "extends": "geekjuice/server"

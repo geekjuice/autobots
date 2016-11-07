@@ -87,7 +87,9 @@ module.exports = (
           return null;
         }
 
-        return { ...value, specifiers: imports };
+        return Object.assign({}, value, {
+          specifiers: imports
+        });
       });
 
     return imported;
@@ -183,7 +185,7 @@ module.exports = (
   // Source
   return root.toSource({
     quote: 'single',
-    reuseWhitespace: false
+    reuseWhitespace: true
   });
 };
 
