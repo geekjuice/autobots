@@ -12,22 +12,19 @@
   "engines": {
     "node": ">=6.x"
   },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "eslint": "3.9.1",
+    "eslint-config-geekjuice": "2.3.7",
+    "eslint-plugin-import": "2.2.0",
+    "jscodeshift": "0.3.30"
+  },
   "devDependencies": {
-    "ava": "^0.16.0"
+    "jest": "^16.0.2"
   },
   "eslintConfig": {
     "extends": "geekjuice/server"
-  },
-  "dependencies": {
-    "eslint": "^3.9.1",
-    "eslint-config-geekjuice": "^2.3.5",
-    "eslint-plugin-import": "^2.0.1",
-    "jscodeshift": "^0.3.30"
-  },
-  "ava": {
-    "files": [
-      "__tests__/**/*.spec.js"
-    ],
-    "failFast": true
   }
 }
