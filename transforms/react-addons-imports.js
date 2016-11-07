@@ -335,7 +335,7 @@ module.exports = (
   // Source
   return root.toSource({
     quote: 'single',
-    reuseWhitespace: false
+    reuseWhitespace: true
   });
 };
 
