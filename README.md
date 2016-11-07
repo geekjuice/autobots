@@ -1,5 +1,7 @@
 # autobots
 
+[![Build Status](https://travis-ci.org/geekjuice/autobots.svg?branch=master)](https://travis-ci.org/geekjuice/autobots)
+
 > Codemods for great good!
 
 ![autobots](https://cloud.githubusercontent.com/assets/1654587/19916765/ad3aed4a-a093-11e6-98ee-78f58f1652bb.gif)
