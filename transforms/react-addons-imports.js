@@ -42,10 +42,9 @@ const ADDONS_PATHS = Object
   .keys(ADDONS_IMPORTS)
   .reduce(
     (memo, key) => {
-      return {
-        ...memo,
+      return Object.assign({}, memo, {
         [ADDONS_IMPORTS[key]]: key
-      };
+      });
     },
     {}
   );
@@ -121,7 +120,9 @@ module.exports = (
           return null;
         }
 
-        return { ...value, specifiers: imports };
+        return Object.assign({}, value, {
+          specifiers: imports
+        });
       });
 
     return current;
@@ -135,7 +136,7 @@ module.exports = (
    * @returns {object}          Updated addon usages
    */
   const removeAddonVariableDeclarations = (node, current = {}) => {
-    const used = { ...current };
+    const used = Object.assign({}, current);
 
     node
       .find(j.VariableDeclaration)
@@ -179,7 +180,7 @@ module.exports = (
    * @returns {object}          Updated addon usages
    */
   const removeReferences = (jsx, node, current = {}) => {
-    const used = { ...current };
+    const used = Object.assign({}, current);
 
     node
       .find(j[`${jsx ? 'JSX' : ''}Identifier`])
@@ -238,7 +239,7 @@ module.exports = (
    * @returns {void}
    */
   const addReactAddonImports = (node, imports = {}) => {
-    const used = { ...imports };
+    const used = Object.assign({}, imports);
 
     node
       .find(j.Program)
@@ -304,14 +305,13 @@ module.exports = (
             );
           });
 
-        return {
-          ...original,
+        return Object.assign({}, original, {
           body: [
             ...body.slice(0, index + 1),
             ...addons,
             ...body.slice(index + 1)
           ]
-        };
+        });
       });
   };
 
